@@ -1,0 +1,303 @@
+{
+  "projectId": "b1ea6f21-a0c4-43e7-83db-06f14cb793a2",
+  "commands": [
+    {
+      "command": "/admin",
+      "description": "Opens the admin dashboard for authorized admin Telegram IDs.",
+      "usage": "/admin",
+      "examples": [
+        "User: /admin → Bot: Admin dashboard button or access denied message"
+      ],
+      "notes": "Admin access is controlled by ADMIN_TELEGRAM_IDS."
+    },
+    {
+      "command": "/app",
+      "description": "Sends a direct Mini App launch button.",
+      "usage": "/app",
+      "examples": [
+        "User: /app → Bot: Open App button"
+      ],
+      "notes": "Useful when users want to jump straight back into the app."
+    },
+    {
+      "command": "/createpoll",
+      "description": "Provides a shortcut to open the Create Poll page in the Mini App.",
+      "usage": "/createpoll",
+      "examples": [
+        "User: /createpoll → Bot: Create Poll button"
+      ],
+      "notes": "Supports normal polls, quizzes, and prediction campaigns."
+    },
+    {
+      "command": "/help",
+      "description": "Shows the main public commands and explains how to use the bot and Mini App.",
+      "usage": "/help",
+      "examples": [
+        "User: /help → Bot: Lists /start, /app, /leaderboard, /rewards, /createpoll, /admin, /reset"
+      ],
+      "notes": "Reflects the actual commands implemented in this project."
+    },
+    {
+      "command": "/leaderboard",
+      "description": "Shows a quick top-user preview and a button to open the full leaderboard page.",
+      "usage": "/leaderboard",
+      "examples": [
+        "User: /leaderboard → Bot: Top users preview and Open Leaderboard button"
+      ],
+      "notes": "Shows current highest-ranking users by points."
+    },
+    {
+      "command": "/reset",
+      "description": "Clears the current user's saved long-term memory for this bot.",
+      "usage": "/reset",
+      "examples": [
+        "User: /reset → Bot: Your saved memory has been cleared."
+      ],
+      "notes": "Included because long-term memory storage is implemented."
+    },
+    {
+      "command": "/rewards",
+      "description": "Provides a shortcut to open the My Rewards page.",
+      "usage": "/rewards",
+      "examples": [
+        "User: /rewards → Bot: Open Rewards button"
+      ],
+      "notes": "Lets the user quickly review points, completed polls, and pending rewards."
+    },
+    {
+      "command": "/start",
+      "description": "Welcomes the user and sends a button that opens the QuickPoll Rewards Mini App.",
+      "usage": "/start",
+      "examples": [
+        "User: /start → Bot: Welcome message with Open QuickPoll Rewards button"
+      ],
+      "notes": "If PUBLIC_BASE_URL is not configured yet, the bot explains that the Mini App URL still needs setup."
+    }
+  ],
+  "aiMessages": [
+    {
+      "role": "user",
+      "content": "Build a Telegram Mini App called QuickPoll Rewards.\n\nIt should be a mobile-first Telegram Mini App for creating polls, quizzes, and community voting campaigns where users can earn points for participating.\n\nThe app should include:\n\n1. A beautiful landing/home screen with the app name, short description, and buttons for:\n- Create Poll\n- Join Poll\n- Leaderboard\n- My Rewards\n\n2. Create Poll page:\n- Allow a user/admin to create a poll with a question\n- Add multiple answer options\n- Choose poll type: Normal Poll, Quiz, Prediction\n- Set optional reward points for participation\n- Set optional end time\n- Save the poll locally or in the database\n\n3. Join Poll page:\n- Show available active polls\n- Let users vote once per poll\n- Display poll options clearly\n- After voting, show a success message and reward points earned\n- Prevent duplicate voting by the same Telegram user\n\n4. Leaderboard page:\n- Show top users by points\n- Display username, Telegram ID, and total points\n- Make it visually clean and mobile-friendly\n\n5. My Rewards page:\n- Show the current user’s points\n- Show completed polls\n- Show pending rewards\n- Add a simple “Claim Reward” button for demo purposes\n\n6. Admin dashboard:\n- Show total polls created\n- Total votes\n- Total users\n- Active polls\n- Ended polls\n\n7. Telegram integration:\n- Detect Telegram WebApp user data\n- Use Telegram username, Telegram ID, first name, and profile photo where available\n- Add a “Share this poll” button using Telegram WebApp sharing\n- Make it work smoothly inside Telegram mobile\n\n8. UI style:\n- Modern, clean, premium design\n- Dark theme by default\n- Rounded cards\n- Smooth buttons\n- Mobile-first layout\n- Use a professional Telegram blue accent color\n- Avoid clutter\n- Make it look like a real product, not a demo\n\n9. Bot behavior:\n- The Telegram bot should start the mini app when the user sends /start\n- The bot should send a welcome message with a button to open the Mini App\n- The bot should explain that users can create polls, vote, and earn points\n\n10. Data:\n- Use a simple database structure for users, polls, votes, and rewards\n- Store Telegram user ID to prevent duplicate votes\n- Keep the code organized and production-ready\n\nMake the app fully functional, responsive, and ready to deploy."
+    },
+    {
+      "role": "assistant",
+      "content": "Built the first complete QuickPoll Rewards version as a Telegram Mini App with grammY bot commands, Express API, React webapp, MongoDB persistence with safe in-memory fallback, duplicate-vote protection, rewards, leaderboard, admin stats, and deploy-ready scripts.\n\nFiles touched (35): .env.sample, DOCS.md, README.md, package.json, project.json, src/bot.js…\nValidation: ✅ project passes syntax/basic checks after this edit."
+    }
+  ],
+  "createdBy": "695397c85603fcac4c8ea626",
+  "source": "ai-cold-start",
+  "description": "",
+  "platform": "telegram",
+  "usesWebApp": true,
+  "telegramKind": "miniapp",
+  "planMarkdown": "Bot: QuickPoll Rewards\n\nSummary:\nA Telegram Mini App and grammY bot for creating polls, quizzes, and prediction campaigns with point-based participation rewards. The system is designed as a single Node.js service that serves the Mini App frontend, exposes backend APIs, handles Telegram bot interactions, detects Telegram WebApp user context, prevents duplicate voting, tracks rewards, and provides admin analytics in a production-ready but lightweight architecture backed by MongoDB.\n\nProduct goals:\nBuild a mobile-first Telegram Mini App that feels like a polished product inside Telegram, allowing users to create polls, join active campaigns, earn points, view rankings, and manage rewards. The core goals are: frictionless entry from /start into the Mini App; simple poll creation for normal polls, quizzes, and predictions; secure one-vote-per-user enforcement using Telegram user identity; clear reward accounting; a leaderboard that motivates repeat participation; and a lightweight admin dashboard for campaign visibility. The experience should prioritize speed, clarity, and trust, with dark-theme UI, premium visual design, and strong Telegram-native behavior such as WebApp user detection and share actions.\n\nHigh-level architecture:\nUse a single Node.js ESM service with grammY as the Telegram bot layer and an HTTP server for the Mini App frontend and JSON APIs. The service has four logical modules: bot module, web module, application services, and persistence layer. The bot module handles /start and sends a welcome message with an inline keyboard button that opens the Mini App using the WebApp URL. The web module serves the Mini App assets and REST-style API endpoints for users, polls, votes, rewards, leaderboard, and admin stats. The Mini App reads Telegram WebApp init data on load, sends it to the backend for validation/auth bootstrap, and then operates with a short-lived app session bound to the Telegram user. Application services enforce business rules such as poll creation validation, duplicate vote prevention, reward point issuance, poll lifecycle status calculation, leaderboard aggregation, and admin metrics. MongoDB stores users, polls, votes, reward ledger entries, and optional app settings. File/image needs, if later added for poll media or avatars caching, should use object storage or filesystem storage, but profile photos can initially be read from Telegram data only when available. The frontend should be a mobile-first SPA served by the same service to keep deployment simple. Suggested route groups: /webapp for frontend assets, /api/auth for Telegram WebApp bootstrap, /api/polls for create/list/detail/vote/share metadata, /api/rewards for balances and claims, /api/leaderboard for ranking, and /api/admin for dashboard aggregates. Access control should distinguish normal users from admins via a configured allowlist of Telegram user IDs in environment variables. Poll active/ended state can be computed dynamically from endTime plus optional explicit status flags.\n\nData model:\nUsers collection: telegramId (unique), username, firstName, photoUrl, isAdmin, pointsBalance, totalPointsEarned, completedPollCount, pendingRewards, claimedRewards, createdAt, updatedAt, lastSeenAt. Polls collection: id, creatorTelegramId, creatorName, question, options [{ id, text }], pollType (normal|quiz|prediction), correctOptionId optional for quiz, rewardPoints default 0, endTime nullable, status (draft|active|ended), totalVotes, shareSlug or deep-link token optional, createdAt, updatedAt. Votes collection: id, pollId, telegramId, optionId, awardedPoints, votedAt, unique compound index on pollId + telegramId to prevent duplicates at database level, plus optional isCorrect for quiz outcomes. Rewards collection or reward ledger: id, telegramId, pollId optional, type (participation|quizbonus|manualclaim|adjustment), points, status (pending|available|claimed), createdAt, claimedAt nullable, metadata. Optional AppSettings/Admin collection: adminTelegramIds, feature flags, default reward points. Important indexes: users.telegramId unique, votes compound unique pollId+telegramId, polls.status+endTime for active list queries, rewards.telegramId+status for reward pages. The points shown on leaderboard can come either from users.totalPointsEarned maintained transactionally during voting or from aggregation over reward ledger; for simplicity and performance in a single-service app, maintain denormalized counters on user records while still writing ledger entries for auditability.\n\nKey flows:\nStart and entry flow: user sends /start, bot replies with a concise welcome message and inline button to open the Mini App. App bootstrap flow: Mini App launches in Telegram, reads WebApp init data, posts it to backend auth endpoint, backend validates Telegram init data signature, upserts the user profile, returns app session info and initial dashboard counts. Create poll flow: user opens Create Poll, enters question, adds options, selects poll type, optional reward points, optional end time, submits form, backend validates payload, persists poll, marks as active unless saved as draft behavior is desired, and returns poll detail plus share action data. Join poll flow: app fetches active polls, user opens poll detail, selects one option, backend checks poll is active, checks no existing vote for pollId+telegramId, records vote atomically, updates poll vote count, writes reward ledger entry if eligible, increments user points and completed poll count, and returns success payload with points earned. Duplicate prevention flow: enforce both application-level check and MongoDB unique index on pollId+telegramId; if duplicate insert attempted, return idempotent error message stating user already voted. Leaderboard flow: app loads top users ordered by totalPointsEarned or pointsBalance, showing username, Telegram ID, and total points with stable rank ordering. My Rewards flow: app loads current user profile, points balance, completed polls via votes joined with polls, pending and claimed reward ledger entries, and offers a demo Claim Reward action that marks pending rewards as claimed according to simple business rules. Admin dashboard flow: if current user is admin, app loads aggregate counts for total polls, total votes, total users, active polls, and ended polls; optionally include recent polls and participation trends later. Share flow: from poll detail, user taps Share this poll, frontend uses Telegram WebApp sharing/deep-link behavior to compose a message or link to the bot/start parameter that reopens the app and optionally focuses the specific poll. Poll lifecycle flow: active polls are those with status active and either no endTime or endTime in the future; ended polls are those explicitly ended or whose endTime has passed. A lightweight scheduled check is not required initially because state can be computed on read, though an optional interval inside the same process may backfill status for analytics consistency.\n\nTech stack:\nNode.js with ESM as the single runtime. grammY for Telegram bot command handling and inline keyboards. Native HTTP framework or a lightweight web framework for serving the Mini App and APIs. MongoDB for persistence. Frontend Mini App as a responsive SPA optimized for Telegram mobile, using a modern component-based UI approach and Telegram WebApp SDK for user context, theme integration, viewport control, and share interactions. Styling should use a dark-first design system with rounded cards, premium spacing, smooth transitions, and a Telegram-blue accent. Authentication is based on validated Telegram WebApp init data rather than standalone login. Configuration via environment variables including TELEGRAMBOTTOKEN, MONGODBURI, WEBAPPURL, ADMINTELEGRAMIDS, and optional APPBASEURL. Logging should be structured and centralized within the single service. Deployment should package the Node service and static frontend together, with MongoDB as the only required external persistence dependency.\n\nNon-functional requirements:\nProduction readiness should focus on simplicity, correctness, and mobile UX. Security: validate Telegram WebApp init data on every bootstrap, trust Telegram ID as the primary identity, protect admin endpoints using configured admin IDs, sanitize user-generated poll text, and validate all API payloads. Reliability: use database unique constraints for duplicate vote prevention, make vote submission atomic enough to avoid double rewards, and return clear client-safe errors. Performance: paginate active polls and leaderboard if data grows, use indexes on key query fields, and denormalize point totals on user records for fast reads. UX: keep interactions thumb-friendly, fast-loading, and visually uncluttered; support dark theme by default and responsive layouts inside Telegram mobile webview. Maintainability: separate bot handlers, API routes, domain services, database models, and frontend screens; keep clear validation and DTO boundaries; centralize constants for poll types and reward statuses. Observability: include request logging, bot event logging, and error capture with enough context to diagnose failed votes or auth issues. Deployment: run as one stateless Node process with environment-based config, static asset serving, and graceful shutdown handling for bot polling or webhook mode. Data integrity: preserve reward ledger history even when user totals are denormalized, and avoid deleting polls or votes physically unless there is an explicit moderation need.\n\nBot commands:\n• /start — Welcomes the user and provides a button to open the QuickPoll Rewards Mini App. (usage: /start) [core]\n• /app — Sends a direct button to launch the Mini App. (usage: /app) [core]\n• /help — Explains how to create polls, join campaigns, earn points, and use the Mini App. (usage: /help) [core]\n• /leaderboard — Shows a quick summary link or preview of the top users by points. (usage: /leaderboard) [engagement]\n• /rewards — Provides a shortcut to open the My Rewards page in the Mini App. (usage: /rewards) [engagement]\n• /createpoll — Provides a shortcut to open the Create Poll page in the Mini App. (usage: /createpoll) [creation]\n• /admin — Opens the admin dashboard for authorized administrators. (usage: /admin) [admin]\n",
+  "planSections": {
+    "productGoals": "Build a mobile-first Telegram Mini App that feels like a polished product inside Telegram, allowing users to create polls, join active campaigns, earn points, view rankings, and manage rewards. The core goals are: frictionless entry from /start into the Mini App; simple poll creation for normal polls, quizzes, and predictions; secure one-vote-per-user enforcement using Telegram user identity; clear reward accounting; a leaderboard that motivates repeat participation; and a lightweight admin dashboard for campaign visibility. The experience should prioritize speed, clarity, and trust, with dark-theme UI, premium visual design, and strong Telegram-native behavior such as WebApp user detection and share actions.",
+    "highLevelArchitecture": "Use a single Node.js ESM service with grammY as the Telegram bot layer and an HTTP server for the Mini App frontend and JSON APIs. The service has four logical modules: bot module, web module, application services, and persistence layer. The bot module handles /start and sends a welcome message with an inline keyboard button that opens the Mini App using the WebApp URL. The web module serves the Mini App assets and REST-style API endpoints for users, polls, votes, rewards, leaderboard, and admin stats. The Mini App reads Telegram WebApp init data on load, sends it to the backend for validation/auth bootstrap, and then operates with a short-lived app session bound to the Telegram user. Application services enforce business rules such as poll creation validation, duplicate vote prevention, reward point issuance, poll lifecycle status calculation, leaderboard aggregation, and admin metrics. MongoDB stores users, polls, votes, reward ledger entries, and optional app settings. File/image needs, if later added for poll media or avatars caching, should use object storage or filesystem storage, but profile photos can initially be read from Telegram data only when available. The frontend should be a mobile-first SPA served by the same service to keep deployment simple. Suggested route groups: /webapp for frontend assets, /api/auth for Telegram WebApp bootstrap, /api/polls for create/list/detail/vote/share metadata, /api/rewards for balances and claims, /api/leaderboard for ranking, and /api/admin for dashboard aggregates. Access control should distinguish normal users from admins via a configured allowlist of Telegram user IDs in environment variables. Poll active/ended state can be computed dynamically from endTime plus optional explicit status flags.",
+    "dataModel": "Users collection: telegramId (unique), username, firstName, photoUrl, isAdmin, pointsBalance, totalPointsEarned, completedPollCount, pendingRewards, claimedRewards, createdAt, updatedAt, lastSeenAt. Polls collection: id, creatorTelegramId, creatorName, question, options [{ id, text }], pollType (normal|quiz|prediction), correctOptionId optional for quiz, rewardPoints default 0, endTime nullable, status (draft|active|ended), totalVotes, shareSlug or deep-link token optional, createdAt, updatedAt. Votes collection: id, pollId, telegramId, optionId, awardedPoints, votedAt, unique compound index on pollId + telegramId to prevent duplicates at database level, plus optional isCorrect for quiz outcomes. Rewards collection or reward ledger: id, telegramId, pollId optional, type (participation|quizbonus|manualclaim|adjustment), points, status (pending|available|claimed), createdAt, claimedAt nullable, metadata. Optional AppSettings/Admin collection: adminTelegramIds, feature flags, default reward points. Important indexes: users.telegramId unique, votes compound unique pollId+telegramId, polls.status+endTime for active list queries, rewards.telegramId+status for reward pages. The points shown on leaderboard can come either from users.totalPointsEarned maintained transactionally during voting or from aggregation over reward ledger; for simplicity and performance in a single-service app, maintain denormalized counters on user records while still writing ledger entries for auditability.",
+    "keyFlows": "Start and entry flow: user sends /start, bot replies with a concise welcome message and inline button to open the Mini App. App bootstrap flow: Mini App launches in Telegram, reads WebApp init data, posts it to backend auth endpoint, backend validates Telegram init data signature, upserts the user profile, returns app session info and initial dashboard counts. Create poll flow: user opens Create Poll, enters question, adds options, selects poll type, optional reward points, optional end time, submits form, backend validates payload, persists poll, marks as active unless saved as draft behavior is desired, and returns poll detail plus share action data. Join poll flow: app fetches active polls, user opens poll detail, selects one option, backend checks poll is active, checks no existing vote for pollId+telegramId, records vote atomically, updates poll vote count, writes reward ledger entry if eligible, increments user points and completed poll count, and returns success payload with points earned. Duplicate prevention flow: enforce both application-level check and MongoDB unique index on pollId+telegramId; if duplicate insert attempted, return idempotent error message stating user already voted. Leaderboard flow: app loads top users ordered by totalPointsEarned or pointsBalance, showing username, Telegram ID, and total points with stable rank ordering. My Rewards flow: app loads current user profile, points balance, completed polls via votes joined with polls, pending and claimed reward ledger entries, and offers a demo Claim Reward action that marks pending rewards as claimed according to simple business rules. Admin dashboard flow: if current user is admin, app loads aggregate counts for total polls, total votes, total users, active polls, and ended polls; optionally include recent polls and participation trends later. Share flow: from poll detail, user taps Share this poll, frontend uses Telegram WebApp sharing/deep-link behavior to compose a message or link to the bot/start parameter that reopens the app and optionally focuses the specific poll. Poll lifecycle flow: active polls are those with status active and either no endTime or endTime in the future; ended polls are those explicitly ended or whose endTime has passed. A lightweight scheduled check is not required initially because state can be computed on read, though an optional interval inside the same process may backfill status for analytics consistency.",
+    "techStack": "Node.js with ESM as the single runtime. grammY for Telegram bot command handling and inline keyboards. Native HTTP framework or a lightweight web framework for serving the Mini App and APIs. MongoDB for persistence. Frontend Mini App as a responsive SPA optimized for Telegram mobile, using a modern component-based UI approach and Telegram WebApp SDK for user context, theme integration, viewport control, and share interactions. Styling should use a dark-first design system with rounded cards, premium spacing, smooth transitions, and a Telegram-blue accent. Authentication is based on validated Telegram WebApp init data rather than standalone login. Configuration via environment variables including TELEGRAMBOTTOKEN, MONGODBURI, WEBAPPURL, ADMINTELEGRAMIDS, and optional APPBASEURL. Logging should be structured and centralized within the single service. Deployment should package the Node service and static frontend together, with MongoDB as the only required external persistence dependency.",
+    "nonFunctional": "Production readiness should focus on simplicity, correctness, and mobile UX. Security: validate Telegram WebApp init data on every bootstrap, trust Telegram ID as the primary identity, protect admin endpoints using configured admin IDs, sanitize user-generated poll text, and validate all API payloads. Reliability: use database unique constraints for duplicate vote prevention, make vote submission atomic enough to avoid double rewards, and return clear client-safe errors. Performance: paginate active polls and leaderboard if data grows, use indexes on key query fields, and denormalize point totals on user records for fast reads. UX: keep interactions thumb-friendly, fast-loading, and visually uncluttered; support dark theme by default and responsive layouts inside Telegram mobile webview. Maintainability: separate bot handlers, API routes, domain services, database models, and frontend screens; keep clear validation and DTO boundaries; centralize constants for poll types and reward statuses. Observability: include request logging, bot event logging, and error capture with enough context to diagnose failed votes or auth issues. Deployment: run as one stateless Node process with environment-based config, static asset serving, and graceful shutdown handling for bot polling or webhook mode. Data integrity: preserve reward ledger history even when user totals are denormalized, and avoid deleting polls or votes physically unless there is an explicit moderation need."
+  },
+  "planCommands": [
+    {
+      "name": "/start",
+      "description": "Welcomes the user and provides a button to open the QuickPoll Rewards Mini App.",
+      "usage": "/start",
+      "category": "core"
+    },
+    {
+      "name": "/app",
+      "description": "Sends a direct button to launch the Mini App.",
+      "usage": "/app",
+      "category": "core"
+    },
+    {
+      "name": "/help",
+      "description": "Explains how to create polls, join campaigns, earn points, and use the Mini App.",
+      "usage": "/help",
+      "category": "core"
+    },
+    {
+      "name": "/leaderboard",
+      "description": "Shows a quick summary link or preview of the top users by points.",
+      "usage": "/leaderboard",
+      "category": "engagement"
+    },
+    {
+      "name": "/rewards",
+      "description": "Provides a shortcut to open the My Rewards page in the Mini App.",
+      "usage": "/rewards",
+      "category": "engagement"
+    },
+    {
+      "name": "/createpoll",
+      "description": "Provides a shortcut to open the Create Poll page in the Mini App.",
+      "usage": "/createpoll",
+      "category": "creation"
+    },
+    {
+      "name": "/admin",
+      "description": "Opens the admin dashboard for authorized administrators.",
+      "usage": "/admin",
+      "category": "admin"
+    }
+  ],
+  "envVarDocs": [
+    {
+      "key": "TELEGRAM_BOT_TOKEN",
+      "title": "Telegram Bot Token",
+      "description": "Required Telegram bot token used by grammY to connect the bot.",
+      "usage": "Read in src/lib/config.js and required at boot in src/index.js.",
+      "howToGet": "Create a bot with BotFather in Telegram and copy the token.",
+      "example": "123456:ABCDEF...",
+      "isSecret": true,
+      "required": true
+    },
+    {
+      "key": "MONGODB_URI",
+      "title": "MongoDB Connection String",
+      "description": "Optional but recommended MongoDB connection used for persistent users, polls, votes, rewards, and memory.",
+      "usage": "Read in src/lib/config.js and used by src/lib/db.js for the shared database connection.",
+      "howToGet": "Create a MongoDB database and copy its connection URI.",
+      "example": "mongodb+srv://user:pass@cluster.example.mongodb.net/quickpoll",
+      "isSecret": true,
+      "required": false
+    },
+    {
+      "key": "PUBLIC_BASE_URL",
+      "title": "Public Base URL",
+      "description": "Canonical deployed base URL for the Mini App. The app path /app is appended in code automatically.",
+      "usage": "Used by src/lib/config.js to build the Mini App URL shown in bot commands.",
+      "howToGet": "Use your deployed Render or public service URL without /app.",
+      "example": "https://your-service.onrender.com",
+      "isSecret": false,
+      "required": false
+    },
+    {
+      "key": "PORT",
+      "title": "HTTP Port",
+      "description": "Port for the Node server that serves the API and Mini App.",
+      "usage": "Used by src/server.js. Render typically injects this automatically.",
+      "howToGet": "Usually not needed manually in production.",
+      "example": "4000",
+      "isSecret": false,
+      "required": false
+    },
+    {
+      "key": "ADMIN_TELEGRAM_IDS",
+      "title": "Admin Telegram IDs",
+      "description": "Comma-separated list of Telegram user IDs allowed to open the admin dashboard.",
+      "usage": "Parsed in src/lib/config.js and enforced in src/services/admin.js and src/services/users.js.",
+      "howToGet": "Use the numeric Telegram IDs of the admins you want to allow.",
+      "example": "123456789,987654321",
+      "isSecret": false,
+      "required": false
+    },
+    {
+      "key": "AI_TIMEOUT_MS",
+      "title": "AI Timeout",
+      "description": "Timeout placeholder for AI-related features and platform guard defaults.",
+      "usage": "Read in src/lib/config.js.",
+      "howToGet": "Optional configuration only.",
+      "example": "600000",
+      "isSecret": false,
+      "required": false
+    },
+    {
+      "key": "AI_MAX_RETRIES",
+      "title": "AI Max Retries",
+      "description": "Retry placeholder for AI-related features and platform guard defaults.",
+      "usage": "Read in src/lib/config.js.",
+      "howToGet": "Optional configuration only.",
+      "example": "2",
+      "isSecret": false,
+      "required": false
+    },
+    {
+      "key": "CONCURRENCY",
+      "title": "Concurrency",
+      "description": "General process concurrency placeholder used to match platform safety defaults.",
+      "usage": "Read in src/lib/config.js.",
+      "howToGet": "Optional configuration only.",
+      "example": "20",
+      "isSecret": false,
+      "required": false
+    }
+  ],
+  "commandDocs": [
+    {
+      "command": "/start",
+      "description": "Welcomes the user and sends a button that opens the QuickPoll Rewards Mini App.",
+      "usage": "/start",
+      "examples": [
+        "User: /start → Bot: Welcome message with Open QuickPoll Rewards button"
+      ],
+      "notes": "If PUBLIC_BASE_URL is not configured yet, the bot explains that the Mini App URL still needs setup."
+    },
+    {
+      "command": "/help",
+      "description": "Shows the main public commands and explains how to use the bot and Mini App.",
+      "usage": "/help",
+      "examples": [
+        "User: /help → Bot: Lists /start, /app, /leaderboard, /rewards, /createpoll, /admin, /reset"
+      ],
+      "notes": "Reflects the actual commands implemented in this project."
+    },
+    {
+      "command": "/app",
+      "description": "Sends a direct Mini App launch button.",
+      "usage": "/app",
+      "examples": [
+        "User: /app → Bot: Open App button"
+      ],
+      "notes": "Useful when users want to jump straight back into the app."
+    },
+    {
+      "command": "/leaderboard",
+      "description": "Shows a quick top-user preview and a button to open the full leaderboard page.",
+      "usage": "/leaderboard",
+      "examples": [
+        "User: /leaderboard → Bot: Top users preview and Open Leaderboard button"
+      ],
+      "notes": "Shows current highest-ranking users by points."
+    },
+    {
+      "command": "/rewards",
+      "description": "Provides a shortcut to open the My Rewards page.",
+      "usage": "/rewards",
+      "examples": [
+        "User: /rewards → Bot: Open Rewards button"
+      ],
+      "notes": "Lets the user quickly review points, completed polls, and pending rewards."
+    },
+    {
+      "command": "/createpoll",
+      "description": "Provides a shortcut to open the Create Poll page in the Mini App.",
+      "usage": "/createpoll",
+      "examples": [
+        "User: /createpoll → Bot: Create Poll button"
+      ],
+      "notes": "Supports normal polls, quizzes, and prediction campaigns."
+    },
+    {
+      "command": "/admin",
+      "description": "Opens the admin dashboard for authorized admin Telegram IDs.",
+      "usage": "/admin",
+      "examples": [
+        "User: /admin → Bot: Admin dashboard button or access denied message"
+      ],
+      "notes": "Admin access is controlled by ADMIN_TELEGRAM_IDS."
+    },
+    {
+      "command": "/reset",
+      "description": "Clears the current user's saved long-term memory for this bot.",
+      "usage": "/reset",
+      "examples": [
+        "User: /reset → Bot: Your saved memory has been cleared."
+      ],
+      "notes": "Included because long-term memory storage is implemented."
+    }
+  ],
+  "title": "QuickPoll Rewards"
+}

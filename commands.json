@@ -1,0 +1,34 @@
+[
+  {
+    "name": "admin",
+    "file": "src/commands/admin.js"
+  },
+  {
+    "name": "app",
+    "file": "src/commands/app.js"
+  },
+  {
+    "name": "createpoll",
+    "file": "src/commands/createpoll.js"
+  },
+  {
+    "name": "help",
+    "file": "src/commands/help.js"
+  },
+  {
+    "name": "leaderboard",
+    "file": "src/commands/leaderboard.js"
+  },
+  {
+    "name": "reset",
+    "file": "src/commands/reset.js"
+  },
+  {
+    "name": "rewards",
+    "file": "src/commands/rewards.js"
+  },
+  {
+    "name": "start",
+    "file": "src/commands/start.js"
+  }
+]
