@@ -8,7 +8,6 @@
       "examples": [
         "User: /admin → Bot: Admin dashboard button or access denied message"
       ],
-      "example": "User: /admin → Bot: Admin dashboard button or access denied message",
       "notes": "Admin access is controlled by ADMIN_TELEGRAM_IDS."
     },
     {
@@ -18,7 +17,6 @@
       "examples": [
         "User: /app → Bot: Open App button"
       ],
-      "example": "User: /app → Bot: Open App button",
       "notes": "Useful when users want to jump straight back into the app."
     },
     {
@@ -28,7 +26,6 @@
       "examples": [
         "User: /createpoll → Bot: Create Poll button"
       ],
-      "example": "User: /createpoll → Bot: Create Poll button",
       "notes": "Supports normal polls, quizzes, and prediction campaigns."
     },
     {
@@ -38,7 +35,6 @@
       "examples": [
         "User: /help → Bot: Lists /start, /app, /leaderboard, /rewards, /createpoll, /admin, /reset"
       ],
-      "example": "User: /help → Bot: Lists /start, /app, /leaderboard, /rewards, /createpoll, /admin, /reset",
       "notes": "Reflects the actual commands implemented in this project."
     },
     {
@@ -48,7 +44,6 @@
       "examples": [
         "User: /leaderboard → Bot: Top users preview and Open Leaderboard button"
       ],
-      "example": "User: /leaderboard → Bot: Top users preview and Open Leaderboard button",
       "notes": "Shows current highest-ranking users by points."
     },
     {
@@ -58,7 +53,6 @@
       "examples": [
         "User: /reset → Bot: Your saved memory has been cleared."
       ],
-      "example": "User: /reset → Bot: Your saved memory has been cleared.",
       "notes": "Included because long-term memory storage is implemented."
     },
     {
@@ -68,7 +62,6 @@
       "examples": [
         "User: /rewards → Bot: Open Rewards button"
       ],
-      "example": "User: /rewards → Bot: Open Rewards button",
       "notes": "Lets the user quickly review points, completed polls, and pending rewards."
     },
     {
@@ -78,7 +71,6 @@
       "examples": [
         "User: /start → Bot: Welcome message with Open QuickPoll Rewards button"
       ],
-      "example": "User: /start → Bot: Welcome message with Open QuickPoll Rewards button",
       "notes": "If PUBLIC_BASE_URL is not configured yet, the bot explains that the Mini App URL still needs setup."
     }
   ],
@@ -113,6 +105,22 @@
       "id": "msg_mq8rfcw5_z5grru",
       "createdAt": "2026-06-11T00:29:05.745Z",
       "kind": "agent_request",
+      "source": "generatedbot"
+    },
+    {
+      "role": "user",
+      "content": "help me check what went wrong as deployment failed"
+    },
+    {
+      "role": "assistant",
+      "content": "I made a targeted deploy-fix pass on the most likely blockers. I fixed a syntax-breaking issue in src/lib/ai.js where a malformed newline string would crash Node during boot, hardened the Express server startup so listen errors surface clearly, and fixed the webapp fetch helper so GET requests do not send a JSON content-type/body pattern that can cause runtime/API issues. Most likely your deployment failed because src/lib/ai.js had invalid JavaScript syntax, which would make the service crash immediately at startup.\n\nFiles touched (5): .env.sample, package.json, src/lib/ai.js, src/server.js, webapp/src/App.jsx\nValidation: ✅ project passes syntax/basic checks after this edit."
+    },
+    {
+      "role": "assistant",
+      "content": "Deployment repair complete. I updated the relevant deployment setup.\n\nReview the project files and test the changed behavior.\n\nCost summary:\n- Charged: $0.75\n- Balance: $10153.82",
+      "id": "local_mq8ris0x_g9v3bd",
+      "createdAt": "2026-06-11T00:31:46.017Z",
+      "kind": "agent_result",
       "source": "generatedbot"
     }
   ],
@@ -230,7 +238,7 @@
       "key": "AI_TIMEOUT_MS",
       "title": "AI Timeout",
       "description": "Timeout placeholder for AI-related features and platform guard defaults.",
-      "usage": "Read in src/lib/config.js.",
+      "usage": "Read in src/lib/config.js and src/lib/ai.js.",
       "howToGet": "Optional configuration only.",
       "example": "600000",
       "isSecret": false,
