@@ -14,6 +14,7 @@ import { getUserByTelegramId } from "./services/users.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 let memLogAt = 0;
+let serverRef = null;
 
 function authFromHeaders(req) {
   return {
@@ -195,10 +196,22 @@ app.get("/app/*splat", (_req, res) => sendIndex(res));
 app.get("/", (_req, res) => res.redirect("/app"));
 
 export async function startServer() {
-  await new Promise((resolve) => {
-    app.listen(cfg.PORT, () => {
+  if (serverRef) {
+    console.log("[http] server already started", { port: cfg.PORT });
+    return serverRef;
+  }
+
+  serverRef = await new Promise((resolve, reject) => {
+    const server = app.listen(cfg.PORT, () => {
       console.log("[http] server started", { port: cfg.PORT });
-      resolve();
+      resolve(server);
+    });
+
+    server.on("error", (err) => {
+      console.error("[http] server failure", { port: cfg.PORT, error: safeErr(err) });
+      reject(err);
     });
   });
+
+  return serverRef;
 }

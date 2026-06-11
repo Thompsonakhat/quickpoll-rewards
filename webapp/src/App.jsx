@@ -148,8 +148,9 @@ export default function App() {
   }, [currentPage]);
 
   async function api(path, options = {}) {
+    const isGet = (options.method || "GET").toUpperCase() === "GET";
     const headers = {
-      "Content-Type": "application/json",
+      ...(isGet ? {} : { "Content-Type": "application/json" }),
       "x-telegram-init-data": initData,
       ...(options.headers || {})
     };
@@ -275,7 +276,7 @@ export default function App() {
   function sharePoll(poll) {
     const text = `Join my QuickPoll Rewards campaign: ${poll.question}`;
     try {
-      if (tg?.switchInlineQuery) {
+      if (typeof tg?.switchInlineQuery === "function") {
         tg.switchInlineQuery(text, ["users", "groups", "channels"]);
         return;
       }

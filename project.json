@@ -2,84 +2,36 @@
   "projectId": "b1ea6f21-a0c4-43e7-83db-06f14cb793a2",
   "commands": [
     {
-      "command": "/admin",
-      "description": "Opens the admin dashboard for authorized admin Telegram IDs.",
-      "usage": "/admin",
-      "examples": [
-        "User: /admin → Bot: Admin dashboard button or access denied message"
-      ],
-      "example": "User: /admin → Bot: Admin dashboard button or access denied message",
-      "notes": "Admin access is controlled by ADMIN_TELEGRAM_IDS."
+      "name": "admin",
+      "file": "src/commands/admin.js"
     },
     {
-      "command": "/app",
-      "description": "Sends a direct Mini App launch button.",
-      "usage": "/app",
-      "examples": [
-        "User: /app → Bot: Open App button"
-      ],
-      "example": "User: /app → Bot: Open App button",
-      "notes": "Useful when users want to jump straight back into the app."
+      "name": "app",
+      "file": "src/commands/app.js"
     },
     {
-      "command": "/createpoll",
-      "description": "Provides a shortcut to open the Create Poll page in the Mini App.",
-      "usage": "/createpoll",
-      "examples": [
-        "User: /createpoll → Bot: Create Poll button"
-      ],
-      "example": "User: /createpoll → Bot: Create Poll button",
-      "notes": "Supports normal polls, quizzes, and prediction campaigns."
+      "name": "createpoll",
+      "file": "src/commands/createpoll.js"
     },
     {
-      "command": "/help",
-      "description": "Shows the main public commands and explains how to use the bot and Mini App.",
-      "usage": "/help",
-      "examples": [
-        "User: /help → Bot: Lists /start, /app, /leaderboard, /rewards, /createpoll, /admin, /reset"
-      ],
-      "example": "User: /help → Bot: Lists /start, /app, /leaderboard, /rewards, /createpoll, /admin, /reset",
-      "notes": "Reflects the actual commands implemented in this project."
+      "name": "help",
+      "file": "src/commands/help.js"
     },
     {
-      "command": "/leaderboard",
-      "description": "Shows a quick top-user preview and a button to open the full leaderboard page.",
-      "usage": "/leaderboard",
-      "examples": [
-        "User: /leaderboard → Bot: Top users preview and Open Leaderboard button"
-      ],
-      "example": "User: /leaderboard → Bot: Top users preview and Open Leaderboard button",
-      "notes": "Shows current highest-ranking users by points."
+      "name": "leaderboard",
+      "file": "src/commands/leaderboard.js"
     },
     {
-      "command": "/reset",
-      "description": "Clears the current user's saved long-term memory for this bot.",
-      "usage": "/reset",
-      "examples": [
-        "User: /reset → Bot: Your saved memory has been cleared."
-      ],
-      "example": "User: /reset → Bot: Your saved memory has been cleared.",
-      "notes": "Included because long-term memory storage is implemented."
+      "name": "reset",
+      "file": "src/commands/reset.js"
     },
     {
-      "command": "/rewards",
-      "description": "Provides a shortcut to open the My Rewards page.",
-      "usage": "/rewards",
-      "examples": [
-        "User: /rewards → Bot: Open Rewards button"
-      ],
-      "example": "User: /rewards → Bot: Open Rewards button",
-      "notes": "Lets the user quickly review points, completed polls, and pending rewards."
+      "name": "rewards",
+      "file": "src/commands/rewards.js"
     },
     {
-      "command": "/start",
-      "description": "Welcomes the user and sends a button that opens the QuickPoll Rewards Mini App.",
-      "usage": "/start",
-      "examples": [
-        "User: /start → Bot: Welcome message with Open QuickPoll Rewards button"
-      ],
-      "example": "User: /start → Bot: Welcome message with Open QuickPoll Rewards button",
-      "notes": "If PUBLIC_BASE_URL is not configured yet, the bot explains that the Mini App URL still needs setup."
+      "name": "start",
+      "file": "src/commands/start.js"
     }
   ],
   "aiMessages": [
